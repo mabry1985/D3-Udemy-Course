@@ -1,18 +1,18 @@
 [
   {
-    "name": "veg soup",
+    "name": "Vue.js",
     "orders": 200
   },
   {
-    "name": "veg curry",
+    "name": "React.js",
     "orders": 600
   },
   {
-    "name": "veg pasta",
+    "name": "Ember.js",
     "orders": 300
   },
   {
-    "name": "veg surprise",
+    "name": "Backbone.js",
     "orders": 900
   }
 ]
