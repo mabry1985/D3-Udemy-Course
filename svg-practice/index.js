@@ -27,8 +27,8 @@ group.append('line')
   .attr('stroke', 'red');
 
 svg.append('text')
-.attr('x', 20)
-.attr('y', 200)
-.attr('fill', 'grey')
-.text('Hello world!')
-.style('font-family', 'cursive');
+  .attr('x', 20)
+  .attr('y', 200)
+  .attr('fill', 'grey')
+  .text('Hello world!')
+  .style('font-family', 'cursive');
