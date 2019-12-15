@@ -35,6 +35,9 @@ const xAxis = d3.axisBottom(x);
 const yAxis = d3.axisLeft(y)
   .ticks(3)
   .tickFormat(d => d + ' orders');
+
+
+const t = d3.transition().duration(750)
   
 const update = (data) => {
   //updating scale domains
@@ -52,20 +55,18 @@ const update = (data) => {
   rects.attr('width', x.bandwidth)
     .attr('fill', 'orange')
     .attr('x', d => x(d.name))
-    .transition().duration(750)
-    .attr("height", d => graphHeight - y(d.mentions))
-    .attr('y', d => y(d.mentions));
 
   rects.enter()
     .append('rect')
-      .attr('width', x.bandwidth)
+      .attr('width', 0)
       .attr('height', 0)
       .attr('fill', 'blue')
       .attr('x', d => x(d.name))
       .attr('y', graphHeight)
-      .transition().duration(750)
-      .attr("height", d => graphHeight - y(d.mentions))
-      .attr('y', d => y(d.mentions));
+      .merge(rects)
+      .transition(t)
+        .attr("height", d => graphHeight - y(d.mentions))
+        .attr('y', d => y(d.mentions));
 
     xAxisGroup.call(xAxis);
     yAxisGroup.call(yAxis);
@@ -99,7 +100,19 @@ db.collection('frameworks').onSnapshot(res => {
   update(data)
 })
 
+const widthTween = (d) => {
 
+  // define interpolation
+  // d3.interpolate returns a function which we call 'i'
+  let i = d3.interpolate(0, x.bandwidth());
+
+  // i(1)
+
+  return function(t) {
+
+    return i(t);
+  }
+}
 
 
 
