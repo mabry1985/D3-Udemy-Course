@@ -54,6 +54,10 @@ const update = (data) => {
       .attr('fill', d => color(d.data.name))
       .each(function (d) { this._current = d })
       .transition().duration(750).attrTween("d", arcTweenEnter);
+
+  graph.selectAll('path')
+    .on('mouseover', handleMouseOver)
+    .on('mouseout', handleMouseOut)
 };
 
 let data = [];
@@ -107,3 +111,15 @@ function arcTweenUpdate(d){
     return arcPath(i(t));
   };
 };
+
+const handleMouseOver = (d, i, n) => {
+  d3.select(n[i])
+    .transition('changeSliceFill').duration(300)
+      .attr('fill', '#fff')
+}
+
+const handleMouseOut = (d, i, n) => {
+  d3.select(n[i])
+    .transition('changeSliceFill').duration(300)
+    .attr('fill', color(d.data.name))
+}
